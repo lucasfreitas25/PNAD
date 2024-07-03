@@ -526,6 +526,7 @@ df_alfab = pd.merge(dfpop_alfab, dftrab_alfab, on=['id', 'local', 'Categoria', '
 df_alfab.to_excel("C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas Tratadas\\Tipo GRAU DE INSTRUÇÃO estadual.xlsx")
 
 
+
 planilha_principal = openpyxl.Workbook()
 
 wb_1209 = openpyxl.load_workbook('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas Tratadas\\Tipo SEXO estadual.xlsx')
@@ -562,3 +563,7 @@ for abas in lista_aba:
     ajustar_colunas(abas)
     
 planilha_principal.save("C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas Tratadas\\PNAD TIPOS ESTADUAL.xlsx")   
+
+if __name__ == '__main__':
+    from sql_Tipos import executar_sql 
+    executar_sql()

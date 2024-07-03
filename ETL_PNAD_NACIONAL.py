@@ -230,14 +230,12 @@ def gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, d
 
 pp = pprint.PrettyPrinter(indent=4)
 dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, dados_limpos_6482 = executando_funcoes()
-dataframe1209, dataframe5918, dataframe6463, dataframe6482 = gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, dados_limpos_6482)
+dfpop, dfidade, dataframe6463, dataframe6482 = gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, dados_limpos_6482)
 
 dftrab = pd.merge(dataframe6463, dataframe6482, on=['id', 'local','unidade', 'ano', 'Trimestre'], how='inner')
-#dftrab = pd.merge(dftrab, dataframe5918, on=['id', 'local','unidade', 'ano', 'Trimestre'], how='inner')
-# print(dftrab)
 dftrab.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\TRABALHO NACIONAL.xlsx', index=False)
-dataframe1209.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\População NACIONAL.xlsx', index=False)
-dataframe5918.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\IDADE TRABALHO NACIONAL.xlsx', index=False)
+dfpop.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\População NACIONAL.xlsx', index=False)
+dfidade.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\IDADE TRABALHO NACIONAL.xlsx', index=False)
 
 #ESTETICA/PLANILHAS
 planilha_principal = openpyxl.Workbook()

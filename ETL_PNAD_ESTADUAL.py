@@ -226,7 +226,6 @@ def gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, d
         df6463.drop(index=i, inplace=True) 
     del df6463['Categoria']
     del df6463['Pessoas de 14 anos ou mais de idade']
-    print(df6482)
     df6482[['Subocupado por insuficiência de horas trabalhadas', 'Força de trabalho potencial', 'Desalentado']] = None
     linhas_6482_H, linhas_6482_FF, linhas_6482_DE =  slice(0, 1295), slice(1296, 2591), slice(2592, 3887)
     df6482['Subocupado por insuficiência de horas trabalhadas'] = df6482.loc[linhas_6482_H, 'Pessoas de 14 anos ou mais de idade']
@@ -250,12 +249,11 @@ def gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, d
 pp = pprint.PrettyPrinter(indent=4)
 dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, dados_limpos_6482 = executando_funcoes()
 dataframe1209, dataframe5918, dataframe6463, dataframe6482 = gerando_dataframe(dados_limpos_1209, dados_limpos_5918, dados_limpos_6463, dados_limpos_6482)
-print(dataframe5918)
-dftrab = pd.merge(dataframe6463, dataframe6482, on=['id', 'local','unidade', 'ano', 'Trimestre', 'AnoSedec'], how='inner')
+dftrab_estadual = pd.merge(dataframe6463, dataframe6482, on=['id', 'local','unidade', 'ano', 'Trimestre', 'AnoSedec'], how='inner')
 
 dataframe1209.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\População ESTADUAL.xlsx', index=False)
 dataframe5918.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\Idade ESTADUAL.xlsx', index=False)
-dftrab.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\Trabalho ESTADUAL.xlsx', index=False)
+dftrab_estadual.to_excel('C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas\\Trabalho ESTADUAL.xlsx', index=False)
 
 planilha_principal = openpyxl.Workbook()
 
@@ -287,3 +285,7 @@ for abas in lista_aba:
     ajustar_colunas(abas)
     
 planilha_principal.save("C:\\Users\\LucasFreitas\\Documents\\Lucas Freitas Arquivos\\DATAHUB\\DADOS\\PNAD\\Planilhas Tratadas\\PNAD ESTADUAL.xlsx")   
+
+if __name__ == '__main__':
+    from sql import executar_sql 
+    executar_sql()
